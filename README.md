@@ -10,7 +10,7 @@ NULL is returned for affected values.
 
 ## Building and Installing
 
-### Linux and macOS
+### Linux, FreeBSD and macOS
 The module can be built using the PGXS framework:
 
 - Unpack the file archive in a suitable directory.
@@ -24,6 +24,8 @@ For example:
     cd system_stats-1.0
     PATH="/usr/local/pgsql/bin:$PATH" make USE_PGXS=1
     sudo PATH="/usr/local/pgsql/bin:$PATH" make install USE_PGXS=1
+
+On FreeBSD, use gmake instead of (BSD) make.
 
 ### Windows
 The module built using the Visual Studio project file:

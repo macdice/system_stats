@@ -7,11 +7,6 @@ OS_PLATFORM := $(shell echo $(UNAME) | tr '[:upper:]' '[:lower:]')
 
 $(info "Platform is: $(OS_PLATFORM)")
 
-# FreeBSD is not supported so do not build it
-ifneq (,$(findstring freebsd, $(OS_PLATFORM)))
-    $(error FreeBSD is not supported by this extension)
-endif
-
 # Solaris is not supported so do not build it
 ifneq (,$(findstring solaris, $(OS_PLATFORM)))
     $(error Solaris is not supported by this extension)
@@ -62,6 +57,24 @@ OBJS = \
 HEADERS = system_stats.h
 
 PG_LDFLAGS= -framework IOKit -framework CoreFoundation
+endif
+
+ifeq ($(UNAME), FreeBSD)
+OBJS = \
+        system_stats.o \
+        freebsd/system_stats_utils.o \
+        freebsd/disk_info.o \
+        freebsd/io_analysis.o \
+        freebsd/cpu_info.o \
+        freebsd/cpu_usage_info.o \
+        freebsd/os_info.o \
+        freebsd/memory_info.o \
+        freebsd/load_avg.o \
+        freebsd/process_info.o \
+        freebsd/network_info.o \
+        freebsd/cpu_memory_by_process.o
+
+HEADERS = system_stats.h
 endif
 
 EXTENSION = system_stats
